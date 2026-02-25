@@ -21,16 +21,7 @@
         <div class="q-gutter-md">
           <div class="q-pa-md bg-blue-1 rounded-borders">
             <div class="text-caption text-grey-7">
-              Obtenha acesso Connection Hub em nossa loja
-              <a
-                href="https://loja.whazing.com.br"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-primary text-decoration-none"
-                style="font-weight: 500"
-              >
-                Acesse aqui
-              </a>
+              Informe abaixo os tokens de integração do Hub para conectar seus canais oficiais.
             </div>
           </div>
 
