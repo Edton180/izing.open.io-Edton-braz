@@ -4,6 +4,7 @@ import Whatsapp from "../../models/Whatsapp";
 import { logger } from "../../utils/logger";
 import setConnectionHubChannelWebhook from "../WbotConnectionHub/helpers/setChannelWebhook";
 import setChannelHubWebhook from "../../helpers/SetChannelWebhook";
+import { isSupportedChannelType } from "../../constants/channelCatalog";
 
 interface Request {
   name: string;
@@ -17,7 +18,7 @@ interface Request {
   tokenAPI?: string;
   fbPageId?: string;
   farewellMessage?: string;
-  type: "waba" | "instagram" | "telegram" | "whatsapp" | "messenger";
+  type: string;
   wavoip?: string;
 }
 
@@ -41,8 +42,16 @@ const CreateWhatsAppService = async ({
   wavoip,
   isDefault = false
 }: Request): Promise<Response> => {
+  if (!isSupportedChannelType(type)) {
+    throw new AppError("ERR_INVALID_CHANNEL_TYPE", 400);
+  }
+
   if (type === "waba" && (!tokenAPI || !wabaBSP)) {
     throw new AppError("WABA: favor informar o Token e a BSP");
+  }
+
+  if ((type.startsWith("hub_") || type.startsWith("con_")) && !tokenAPI) {
+    throw new AppError("Canal HUB: favor informar o token de integração.");
   }
 
   if (type === "instagram" && !instagramUser) {

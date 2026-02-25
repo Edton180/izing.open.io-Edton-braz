@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { number } from "yup";
 import { getIO } from "../libs/socket";
 import AdminListChatFlowService from "../services/AdminServices/AdminListChatFlowService";
 import AdminListSettingsService from "../services/AdminServices/AdminListSettingsService";
@@ -14,6 +13,7 @@ import AdminCreateUserService from "../services/AdminServices/AdminCreateUserSer
 import AdminUpdateTenantService from "../services/AdminServices/AdminUpdateTenentService";
 import AdminCreateTenantService from "../services/AdminServices/AdminCreateTenantService";
 import AdminDeleteTenantService from "../services/AdminServices/AdminDeleteTenantService";
+import { CHANNEL_CATALOG, isSupportedChannelType } from "../constants/channelCatalog";
 
 type IndexQuery = {
   searchParam: string;
@@ -31,7 +31,7 @@ interface ChannelData {
   tokenTelegram?: string;
   instagramUser?: string;
   instagramKey?: string;
-  type: "waba" | "instagram" | "telegram" | "whatsapp";
+  type: string;
   wabaBSP?: string;
   tokenAPI?: string;
   tenantId: string | number;
@@ -161,6 +161,23 @@ export const indexChannels = async (
   return res.status(200).json(channels);
 };
 
+export const indexChannelsCatalog = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { official } = req.query as any;
+
+  const channelsCatalog = CHANNEL_CATALOG.filter(channel => {
+    if (official === undefined) {
+      return true;
+    }
+
+    return official === "true" ? channel.isOfficial : true;
+  });
+
+  return res.status(200).json(channelsCatalog);
+};
+
 export const storeChannel = async (
   req: Request,
   res: Response
@@ -187,6 +204,10 @@ export const storeChannel = async (
     wabaBSP,
     tokenAPI
   };
+
+  if (!isSupportedChannelType(type)) {
+    throw new AppError("ERR_INVALID_CHANNEL_TYPE", 400);
+  }
 
   const channels = await CreateWhatsAppService(data);
   return res.status(200).json(channels);
@@ -218,4 +239,3 @@ export const storeUser = async (req: Request, res: Response): Promise<Response> 
     throw error;
   }
 };
-

@@ -123,13 +123,14 @@ export const show = async (req: Request, res: Response): Promise<Response> => {
   //   );
   // }
   const where = {
-    contactId: ticket.contactId,
+    ticketId: ticket.id,
+    tenantId,
     scheduleDate: { [Op.not]: null },
     status: "pending"
   };
   const scheduledMessages = await Message.findAll({
-    where
-    // logging: console.log
+    where,
+    order: [["scheduleDate", "ASC"]]
   });
 
   ticket.setDataValue("scheduledMessages", scheduledMessages);

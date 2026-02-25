@@ -43,6 +43,11 @@ adminRoutes.put(
 );
 
 adminRoutes.get("/admin/channels", isAuthAdmin, AdminController.indexChannels);
+adminRoutes.get(
+  "/admin/channels/catalog",
+  isAuthAdmin,
+  AdminController.indexChannelsCatalog
+);
 adminRoutes.post("/admin/channels", isAuthAdmin, AdminController.storeChannel);
 
 adminRoutes.post("/admin/userTenants", isAuthAdmin, AdminController.storeUser);
