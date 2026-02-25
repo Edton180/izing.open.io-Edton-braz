@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Izing</title>
+    <title><%= process.env.VUE_APP_BRAND_NAME || 'Izing' %></title>
     <meta charset="utf-8">
-    <meta name="description" content="Bot Multi-atendimento Whatsapp, Instagram e Facebook">
+    <meta name="description" content="<%= process.env.VUE_APP_BRAND_DESCRIPTION || 'Bot Multi-atendimento Whatsapp, Instagram e Facebook' %>">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (ctx.mode.cordova || ctx.mode.capacitor) { %>, viewport-fit=cover<% } %>">
 
     <!-- Tags adicionais para redes sociais (opcional, melhora compartilhamento) -->
-    <meta property="og:title" content="Bot Multi-atendimento Whatsapp, Instagram e Facebook">
-    <meta property="og:description" content="Bot Multi-atendimento Whatsapp, Instagram e Facebook">
+    <meta property="og:title" content="<%= process.env.VUE_APP_BRAND_NAME || 'Izing' %>">
+    <meta property="og:description" content="<%= process.env.VUE_APP_BRAND_DESCRIPTION || 'Bot Multi-atendimento Whatsapp, Instagram e Facebook' %>">
     <meta property="og:type" content="website">
     <meta name="robots" content="noindex">
 
-    <link rel="icon" type="image/png" sizes="128x128" href="icons/icon-128x128.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
-    <link rel="icon" type="image/ico" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="128x128" href="<%= process.env.VUE_APP_BRAND_FAVICON_128 || '/icons/icon-128x128.png' %>">
+    <link rel="icon" type="image/png" sizes="96x96" href="<%= process.env.VUE_APP_BRAND_FAVICON_96 || '/icons/favicon-96x96.png' %>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= process.env.VUE_APP_BRAND_FAVICON_32 || '/icons/favicon-32x32.png' %>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= process.env.VUE_APP_BRAND_FAVICON_16 || '/icons/favicon-16x16.png' %>">
+    <link rel="icon" type="image/ico" href="<%= process.env.VUE_APP_BRAND_FAVICON_ICO || '/favicon.ico' %>">
   </head>
   <body>
     <!-- DO NOT touch the following DIV -->

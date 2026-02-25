@@ -44,7 +44,15 @@ const getTenantMaxUsers = async (tenantId: string): Promise<number> => {
 
 export const store = async (req: Request, res: Response): Promise<Response> => {
   const { tenantId } = req.user;
-  const { email, password, name, profile } = req.body;
+  const {
+    email,
+    password,
+    name,
+    profile,
+    loginAllowedStartTime,
+    loginAllowedEndTime,
+    allowedIpList
+  } = req.body;
   const { users } = await ListUsersService({ tenantId });
 
   if (users.length >= Number(process.env.USER_LIMIT)) {
@@ -65,7 +73,10 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
     password,
     name,
     profile,
-    tenantId
+    tenantId,
+    loginAllowedStartTime,
+    loginAllowedEndTime,
+    allowedIpList
   });
 
   const io = getIO();

@@ -27,7 +27,7 @@
           v-if="$q.screen.gt.xs"
         >
           <q-img
-            src="/logo_izing.png"
+            :src="brandLogo"
             spinner-color="primary"
             style="height: 50px; width: 140px"
           />
@@ -268,6 +268,7 @@ import { RealizarLogout } from 'src/service/login'
 import cStatusUsuario from '../components/cStatusUsuario.vue'
 import { socketIO } from 'src/utils/socket'
 import { ConsultarTickets } from 'src/service/tickets'
+import brand from '../config.brand'
 
 const socket = socketIO()
 
@@ -441,6 +442,9 @@ export default {
         })
       }
       return objMenu
+    },
+    brandLogo () {
+      return brand.logo
     }
   },
   methods: {
