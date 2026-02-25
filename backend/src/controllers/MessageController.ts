@@ -28,6 +28,20 @@ type MessageData = {
   idFront?: string;
 };
 
+const parseScheduleDate = (value?: string | Date): Date | undefined => {
+  if (!value) {
+    return undefined;
+  }
+
+  const parsedDate = value instanceof Date ? value : new Date(value);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    throw new AppError("ERR_INVALID_SCHEDULE_DATE", 400);
+  }
+
+  return parsedDate;
+};
+
 export const index = async (req: Request, res: Response): Promise<Response> => {
   const { ticketId } = req.params;
   const { pageNumber } = req.query as IndexQuery;
@@ -62,13 +76,19 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
     console.log("SetTicketMessagesAsRead", error);
   }
 
+  const scheduleDate = parseScheduleDate(messageData.scheduleDate);
+
+  if (scheduleDate && scheduleDate.getTime() <= Date.now()) {
+    throw new AppError("ERR_SCHEDULE_DATE_IN_PAST", 400);
+  }
+
   await CreateMessageSystemService({
     msg: messageData,
     tenantId,
     medias,
     ticket,
     userId,
-    scheduleDate: messageData.scheduleDate,
+    scheduleDate,
     sendType: messageData.sendType || "chat",
     status: "pending",
     idFront: messageData.idFront
