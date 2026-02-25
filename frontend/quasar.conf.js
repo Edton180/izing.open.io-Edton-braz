@@ -46,7 +46,15 @@ module.exports = function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       env: {
-        VUE_URL_API: process.env.VUE_URL_API
+        VUE_URL_API: process.env.VUE_URL_API,
+        VUE_APP_BRAND_NAME: process.env.VUE_APP_BRAND_NAME || 'Izing',
+        VUE_APP_BRAND_DESCRIPTION: process.env.VUE_APP_BRAND_DESCRIPTION || 'Bot Multi-atendimento Whatsapp, Instagram e Facebook',
+        VUE_APP_BRAND_LOGO: process.env.VUE_APP_BRAND_LOGO || '/logo_izing.png',
+        VUE_APP_BRAND_FAVICON_ICO: process.env.VUE_APP_BRAND_FAVICON_ICO || '/favicon.ico',
+        VUE_APP_BRAND_FAVICON_16: process.env.VUE_APP_BRAND_FAVICON_16 || '/icons/favicon-16x16.png',
+        VUE_APP_BRAND_FAVICON_32: process.env.VUE_APP_BRAND_FAVICON_32 || '/icons/favicon-32x32.png',
+        VUE_APP_BRAND_FAVICON_96: process.env.VUE_APP_BRAND_FAVICON_96 || '/icons/favicon-96x96.png',
+        VUE_APP_BRAND_FAVICON_128: process.env.VUE_APP_BRAND_FAVICON_128 || '/icons/icon-128x128.png'
       },
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
@@ -127,9 +135,9 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: { maximumFileSizeToCacheInBytes: 5000000 }, // only for GenerateSW
       manifest: {
-        name: 'IZING',
-        short_name: 'IZING',
-        description: 'Bot Multi-atendimento para whatsapp',
+        name: process.env.VUE_APP_BRAND_NAME || 'IZING',
+        short_name: process.env.VUE_APP_BRAND_NAME || 'IZING',
+        description: process.env.VUE_APP_BRAND_DESCRIPTION || 'Bot Multi-atendimento para whatsapp',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -193,7 +201,7 @@ module.exports = function (ctx) {
 
       builder: {
         // https://www.electron.build/configuration/configuration
-        appId: 'IZING'
+        appId: process.env.VUE_APP_BRAND_NAME || 'IZING'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration

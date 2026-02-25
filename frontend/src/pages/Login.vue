@@ -14,7 +14,7 @@
         >
           <q-card-section class="text-primary text-center">
             <q-img
-              src="/logo_izing.png"
+              :src="brandLogo"
               spinner-color="white"
               style="height: 120px; max-width: 300px"
               class="q-mb-lg q-px-md"
@@ -107,6 +107,7 @@
 
 <script>
 import { required, email } from 'vuelidate/lib/validators'
+import brand from '../config.brand'
 
 export default {
   name: 'Login',
@@ -121,6 +122,11 @@ export default {
       contasCliente: {},
       isPwd: true,
       loading: false
+    }
+  },
+  computed: {
+    brandLogo () {
+      return brand.logo
     }
   },
   validations: {

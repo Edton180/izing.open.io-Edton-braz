@@ -16,6 +16,9 @@ interface UserData {
   name?: string;
   profile?: string;
   queues?: UserQueues[];
+  loginAllowedStartTime?: string;
+  loginAllowedEndTime?: string;
+  allowedIpList?: string[];
 }
 
 interface Request {
@@ -49,13 +52,33 @@ const UpdateUserService = async ({
     name: Yup.string().min(2),
     email: Yup.string().email(),
     profile: Yup.string(),
-    password: Yup.string()
+    password: Yup.string(),
+    loginAllowedStartTime: Yup.string().nullable(),
+    loginAllowedEndTime: Yup.string().nullable(),
+    allowedIpList: Yup.array().of(Yup.string().trim().required()).nullable()
   });
 
-  const { email, password, profile, name, queues } = userData;
+  const {
+    email,
+    password,
+    profile,
+    name,
+    queues,
+    loginAllowedStartTime,
+    loginAllowedEndTime,
+    allowedIpList
+  } = userData;
 
   try {
-    await schema.validate({ email, password, profile, name });
+    await schema.validate({
+      email,
+      password,
+      profile,
+      name,
+      loginAllowedStartTime,
+      loginAllowedEndTime,
+      allowedIpList
+    });
   } catch (err: any) {
     throw new AppError(err?.message);
   }
@@ -75,7 +98,10 @@ const UpdateUserService = async ({
     email,
     password,
     profile,
-    name
+    name,
+    loginAllowedStartTime,
+    loginAllowedEndTime,
+    allowedIpList
   });
 
   await user.reload({

@@ -6,10 +6,12 @@ import {
   createRefreshToken
 } from "../../helpers/CreateTokens";
 import Queue from "../../models/Queue";
+import { canUserLogin } from "../../utils/loginAccessPolicy";
 
 interface Request {
   email: string;
   password: string;
+  requestIp?: string;
 }
 
 interface Response {
@@ -21,7 +23,8 @@ interface Response {
 
 const AuthUserService = async ({
   email,
-  password
+  password,
+  requestIp
 }: Request): Promise<Response> => {
   const user = await User.findOne({
     where: { email },
@@ -40,6 +43,17 @@ const AuthUserService = async ({
 
   if (!tenant || tenant.status !== "active") {
     throw new AppError("ERR_COMPANY_NOT_ACTIVE", 401);
+  }
+
+  if (
+    !canUserLogin({
+      allowedIpList: user.allowedIpList,
+      loginAllowedStartTime: user.loginAllowedStartTime,
+      loginAllowedEndTime: user.loginAllowedEndTime,
+      requestIp
+    })
+  ) {
+    throw new AppError("ERR_LOGIN_RESTRICTED", 403);
   }
 
   const token = createAccessToken(user);

@@ -4,6 +4,8 @@
   </div>
 </template>
 <script>
+import brand from './config.brand'
+
 export default {
   name: 'App',
   data () {
@@ -25,6 +27,8 @@ export default {
     }
   },
   beforeMount () {
+    document.title = brand.name
+
     const usuario = JSON.parse(localStorage.getItem('usuario'))
     if (usuario?.configs?.isDark) {
       this.$q.dark.set(usuario?.configs?.isDark)

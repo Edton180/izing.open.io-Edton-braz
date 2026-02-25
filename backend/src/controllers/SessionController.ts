@@ -13,10 +13,15 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
   const io = getIO();
 
   const { email, password } = req.body;
+  const requestIp = (req.headers["x-forwarded-for"] as string || "")
+    .split(",")
+    .shift()
+    ?.trim() || req.socket.remoteAddress || req.ip;
 
   const { token, user, refreshToken, usuariosOnline } = await AuthUserService({
     email,
-    password
+    password,
+    requestIp
   });
 
   SendRefreshToken(res, refreshToken);

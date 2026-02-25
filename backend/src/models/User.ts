@@ -87,6 +87,17 @@ class User extends Model<User> {
   @Column
   isOnline: boolean;
 
+  @Column(DataType.TIME)
+  loginAllowedStartTime: string;
+
+  @Column(DataType.TIME)
+  loginAllowedEndTime: string;
+
+  @AllowNull
+  @Default(null)
+  @Column(DataType.JSONB)
+  allowedIpList: string[];
+
   @Default({})
   @AllowNull
   @Column(DataType.JSON)
