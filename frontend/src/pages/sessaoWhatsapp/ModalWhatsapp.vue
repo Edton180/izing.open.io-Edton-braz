@@ -219,7 +219,7 @@
         <div class="col-12" v-if="whatsapp.type === 'whatsapp'">
           <div class="row items-center">
             <div class="col-12">
-              <label class="text-caption">Use cupom desconto "whazing" - <a href="https://app.wavoip.com/" target="_blank">Visite app.wavoip.com</a></label>
+              <label class="text-caption">Configure seu identificador do Wavoip para habilitar chamadas WhatsApp.</label>
               <c-input outlined
                        label="Wavoip chamadas whatsapp"
                        v-model="whatsapp.wavoip"/>

@@ -1,11 +1,5 @@
 # Guia de Configuração do Hub - Instagram e Facebook
 
-Cupom desconto Notifica Me - cadastre pelo link https://hub.whazing.com.br
-
-```bash
-whazing
-```
-
 ## Acesso ao Hub
 1. Acesse o site: [https://hub.notificame.com.br/](https://hub.notificame.com.br/)
 2. Escolha a opção correta de acordo com o canal desejado:

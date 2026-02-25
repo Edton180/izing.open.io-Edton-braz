@@ -615,18 +615,8 @@ docker container restart portainer
 Depois acesse novamente url http://seuip:9000/
 
 
-## Recomendação de VPS boa e barata
+## Observações finais
 
--  [Powerful cloud VPS & Web hosting.](https://control.peramix.com/?affid=58)
+Se você quiser, adapte esta documentação para o seu ambiente (provedor VPS, domínio, certificados e monitoramento).
 
-- Cupom 25% desconto "WHAZING"
-
-```bash
-WHAZING
-```
-
-## Consultoria particular
-
-Para quem gostaria de uma consultoria ou que eu faça instalação pode chamar no whatsapp (será cobrado por isso) 48 999416725
-
--  [Versão baseada no izing com Painel SaaS e API Baileys](https://github.com/cleitonme/Whazing-SaaS)
+Recomenda-se validar backup, restore e atualização em ambiente de homologação antes de aplicar em produção.

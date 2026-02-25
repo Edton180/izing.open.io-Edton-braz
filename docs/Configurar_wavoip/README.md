@@ -27,12 +27,3 @@
 
 7. **Para realizar uma ligação**  
    - Abra um ticket e você verá o botão de telefone na parte superior do ticket. Clique nele para iniciar a ligação.
-
----
-
-### Dica Especial  
-- Aproveite o cupom de desconto **50% OFF** ao utilizar o código abaixo:
-
-```bash
-whazing
-```
