@@ -25,6 +25,7 @@ import hubChannelRoutes from "./hubChannelRoutes";
 import hubMessageRoutes from "./hubMessageRoutes";
 import hubWebhookRoutes from "./hubWebhookRoutes";
 import ConnectionHubRoutes from "./ConnectionHubRoutes";
+import paymentProviderRoutes from "./paymentProviderRoutes";
 
 const routes = Router();
 
@@ -54,5 +55,6 @@ routes.use(hubChannelRoutes);
 routes.use(hubMessageRoutes);
 routes.use(hubWebhookRoutes);
 routes.use(ConnectionHubRoutes);
+routes.use(paymentProviderRoutes);
 
 export default routes;

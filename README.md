@@ -23,6 +23,9 @@ Usuários padrão de ambiente de desenvolvimento:
   - Asaas
   - InfinitePay
   - Stripe
+  - PayPal
+  - Pagar.me
+  - PagBank
 - Formas de pagamento: PIX, cartão e boleto.
 - Menu de ajuda com acesso rápido a tutoriais e suporte.
 - Multi idioma: Português, Inglês e Espanhol.
